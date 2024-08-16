@@ -1,1 +1,15 @@
 # Learning react 🚀
+
+# Parcel
+- Local Server
+- Dev build
+- Hot module replacement
+- Production build
+- File watching algorithm ( keeps an eye on the files and only rebuilds the ones that have changed )
+- Faster build because of caching
+- Bundling
+- Image optimisation
+- Minification 
+- Differential bundling
+- Code splitting
+- Tree shaking !
