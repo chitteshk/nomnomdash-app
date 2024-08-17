@@ -1,0 +1,53 @@
+
+.header {
+    display: flex;
+    justify-content: space-between; /* Space between logo and nav items */
+    align-items: center; /* Vertically center items */ /* Add horizontal padding for spacing */
+    background-color: #f8f8f8; /* Optional: background color for visual clarity */
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .nav-items ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align items horizontally */
+  }
+  
+  .nav-items li {
+    margin: 0 15px; /* Space between navigation items */
+    cursor: pointer; /* Optional: change cursor on hover */
+  }
+  
+  .nav-items li:hover {
+    text-decoration: underline; /* Optional: underline on hover */
+  }
+
+  .restaurant-card {
+    background-color: #f0f0f0;
+    width: 240px;
+    min-height: 300px; /* Minimum height */
+    margin: 4px 4px;
+    padding: 8px; /* Optional padding for better spacing */
+    box-sizing: border-box; /* Include padding in width/height */
+  }
+
+  .restaurant-card > img {
+    width: 100%;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .restaurant-card:hover {
+    cursor: pointer;
+    border: 1px solid black;
+  }
+  
