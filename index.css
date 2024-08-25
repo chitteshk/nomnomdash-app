@@ -30,16 +30,20 @@
 
   .restaurant-card {
     background-color: #f0f0f0;
-    width: 240px;
+    width: 234px;
     min-height: 300px; /* Minimum height */
     margin: 4px 4px;
     padding: 8px; /* Optional padding for better spacing */
     box-sizing: border-box; /* Include padding in width/height */
   }
 
-  .restaurant-card > img {
-    width: 100%;
-  }
+ 
+.restaurant-card img {
+    width: 100%; /* Ensure the image takes full width of the container */
+    height: 150px; /* Fixed height for all images */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+    border-radius: 8px;
+}
 
   .cards-container {
     display: flex;
@@ -49,5 +53,27 @@
   .restaurant-card:hover {
     cursor: pointer;
     border: 1px solid black;
+  }
+  
+/* Change this class to set an active state background */
+.active {
+    background-color: grey;
+    border: 1px solid black; /* Optional: Add a border for clarity */
+  }
+  
+  /* Change this class to define the inactive state appearance */
+  .inactive {
+    background-color: transparent;
+    border: 1px solid gray; /* Optional: Border to differentiate */
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0px
+  }
+
+  .search-container {
+    padding: 0 14px;
   }
   
