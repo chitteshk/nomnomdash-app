@@ -6,7 +6,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import MenuCard from "./components/MenuCard";
+import MenuCard from "./components/Menu/MenuCard";
 
 const Applayout = () => {
   return (

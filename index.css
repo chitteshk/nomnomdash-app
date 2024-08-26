@@ -76,4 +76,50 @@
   .search-container {
     padding: 0 14px;
   }
-  
+
+  .res-info {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 16px;
+}
+.res-info img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+.res-info .content {
+    padding: 16px;
+}
+.res-info h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+.res-info p {
+    margin: 8px 0;
+    color: #555;
+}
+.status {
+    font-weight: bold;
+}
+
+.res-info-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 13px 0px;
+}
+
+.menu-category-container{
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 16px;
+}
