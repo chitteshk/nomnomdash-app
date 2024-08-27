@@ -123,3 +123,18 @@
     margin: 20px;
     padding: 16px;
 }
+
+.menu-item{
+    display: flex;
+    justify-content: space-between;
+}
+.menu-item-img img {
+    width: 200px;
+    border-radius: 10%;
+}
+
+.line-break {
+    margin: 22px 0px;
+    border: 1px solid lightgray;
+    width: 100%;
+}

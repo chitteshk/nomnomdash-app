@@ -1,18 +1,24 @@
 import { useState, useEffect } from "react";
+const ItemCard = ({ card, isSubcategory }) => {
+  
+    // Conditionally render the item card if it's not a subcategory
+    return (card?.info && !isSubcategory) ? (
+      <><div key={card.info.id} className="menu-item">
+            <div className="menu-item-description">
+                <h3>{card.info.name}</h3>
+                <p><strong>Description:</strong> {card.info.description}</p>
+                <p><strong>Price:</strong> {`Rs ${card?.info?.price / 100 || card?.info?.defaultPrice / 100}`}</p></div>
+            <div className="menu-item-img">
 
-const ItemCard = ({ card }) => (
-  card?.info ?  (
-    <div key={card.info.id} className="menu-item">
-      <h3>{card.info.name}</h3>
-      <p><strong>Description:</strong> {card.info.description}</p>
-      <p><strong>Price:</strong> {card.info.price}</p>
-    </div>
-  ) : null
-);
+                <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${card?.info?.imageId}`} alt="img" />
 
+            </div>
+        </div><div className="line-break"></div></>
+    ) : null;
+  };
+  
 const SubCategory = ({ subCategoryData }) => (
   <div className="sub-category-container">
-    <h3>{subCategoryData.title || "Subcategory"}</h3>
     {subCategoryData.categories && subCategoryData.categories.map((cat, index) => (
       <MenuCardCategory key={index} categoryData={cat} />
     ))}
@@ -27,15 +33,19 @@ const MenuCardCategory = ({ categoryData }) => {
     const getItemCards = (data) => {
       let itemCards = [];
 
-      const traverse = (categories) => {
+      const traverse = (categories, isSubcategory = false) => {
         if (Array.isArray(categories)) {
           categories.forEach((category) => {
             if (category.itemCards && Array.isArray(category.itemCards)) {
-              itemCards = itemCards.concat(category.itemCards);
+                const modifiedItemCards = category.itemCards.map((itemCard) => ({
+                    ...itemCard,
+                    isSubcategory,
+                  }));
+              itemCards = itemCards.concat(modifiedItemCards);
             }
 
             if (category.categories && Array.isArray(category.categories)) {
-              traverse(category.categories);
+              traverse(category.categories, true);
             }
           });
         }
@@ -45,9 +55,13 @@ const MenuCardCategory = ({ categoryData }) => {
       return itemCards;
     };
 
+  
+
     const categoryArray = Array.isArray(categoryData) ? categoryData : [categoryData];
+    console.log(categoryArray);
     const extractedItemCards = getItemCards(categoryArray);
     setItemData(extractedItemCards);
+    // console.log(extractedItemCards);
 
     const categoriesWithSubCategories = categoryArray.filter(
       (category) => Array.isArray(category.categories) && category.categories.length > 0
@@ -61,7 +75,7 @@ const MenuCardCategory = ({ categoryData }) => {
       <div className="menu-items-container">
         {itemData.length > 0 ? (
           itemData.map((item) => (
-            <ItemCard key={item.card.info.id} card={item.card} />
+            <ItemCard key={item.card.info.id} card={item.card} isSubcategory={item.isSubcategory} />
           ))
         ) : (
           <p>No items available</p>
