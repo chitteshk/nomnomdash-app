@@ -1,27 +1,37 @@
 import { useState, useEffect } from "react";
 const ItemCard = ({ card, isSubcategory }) => {
-  
-    // Conditionally render the item card if it's not a subcategory
-    return (card?.info && !isSubcategory) ? (
-      <><div key={card.info.id} className="menu-item">
-            <div className="menu-item-description">
-                <h3>{card.info.name}</h3>
-                <p><strong>Description:</strong> {card.info.description}</p>
-                <p><strong>Price:</strong> {`Rs ${card?.info?.price / 100 || card?.info?.defaultPrice / 100}`}</p></div>
-            <div className="menu-item-img">
+  // Conditionally render the item card if it's not a subcategory
+  return card?.info && !isSubcategory ? (
+    <>
+      <div key={card.info.id} className="menu-item">
+        <div className="menu-item-description">
+          <h3>{card.info.name}</h3>
+          <p>
+            <strong>Description:</strong> {card.info.description}
+          </p>
+          <p>
+            <strong>Price:</strong>{" "}
+            {`Rs ${card?.info?.price / 100 || card?.info?.defaultPrice / 100}`}
+          </p>
+        </div>
+        <div className="menu-item-img">
+          <img
+            src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${card?.info?.imageId}`}
+            alt="img"
+          />
+        </div>
+      </div>
+      <div className="line-break"></div>
+    </>
+  ) : null;
+};
 
-                <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${card?.info?.imageId}`} alt="img" />
-
-            </div>
-        </div><div className="line-break"></div></>
-    ) : null;
-  };
-  
 const SubCategory = ({ subCategoryData }) => (
   <div className="sub-category-container">
-    {subCategoryData.categories && subCategoryData.categories.map((cat, index) => (
-      <MenuCardCategory key={index} categoryData={cat} />
-    ))}
+    {subCategoryData.categories &&
+      subCategoryData.categories.map((cat, index) => (
+        <MenuCardCategory key={index} categoryData={cat} />
+      ))}
   </div>
 );
 
@@ -37,10 +47,10 @@ const MenuCardCategory = ({ categoryData }) => {
         if (Array.isArray(categories)) {
           categories.forEach((category) => {
             if (category.itemCards && Array.isArray(category.itemCards)) {
-                const modifiedItemCards = category.itemCards.map((itemCard) => ({
-                    ...itemCard,
-                    isSubcategory,
-                  }));
+              const modifiedItemCards = category.itemCards.map((itemCard) => ({
+                ...itemCard,
+                isSubcategory,
+              }));
               itemCards = itemCards.concat(modifiedItemCards);
             }
 
@@ -55,16 +65,15 @@ const MenuCardCategory = ({ categoryData }) => {
       return itemCards;
     };
 
-  
-
-    const categoryArray = Array.isArray(categoryData) ? categoryData : [categoryData];
-    console.log(categoryArray);
+    const categoryArray = Array.isArray(categoryData)
+      ? categoryData
+      : [categoryData];
     const extractedItemCards = getItemCards(categoryArray);
     setItemData(extractedItemCards);
-    // console.log(extractedItemCards);
 
     const categoriesWithSubCategories = categoryArray.filter(
-      (category) => Array.isArray(category.categories) && category.categories.length > 0
+      (category) =>
+        Array.isArray(category.categories) && category.categories.length > 0
     );
     setSubCategories(categoriesWithSubCategories);
   }, [categoryData]);
@@ -75,7 +84,11 @@ const MenuCardCategory = ({ categoryData }) => {
       <div className="menu-items-container">
         {itemData.length > 0 ? (
           itemData.map((item) => (
-            <ItemCard key={item.card.info.id} card={item.card} isSubcategory={item.isSubcategory} />
+            <ItemCard
+              key={item.card.info.id}
+              card={item.card}
+              isSubcategory={item.isSubcategory}
+            />
           ))
         ) : (
           <p>No items available</p>
