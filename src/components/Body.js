@@ -37,10 +37,10 @@ const Body = () => {
     setShowTop((prevState) => {
       const newState = !prevState;
       if (newState) {
-        const filteredRestaurants = restaurantList.filter(
+        const topRestaurant = filteredRestaurants.filter(
           (resData) => resData.info.avgRating > 4.5
         );
-        setRestaurantList(filteredRestaurants);
+        setFilteredRestaurants(topRestaurant);
       } else {
         fetchRestaurants();
       }

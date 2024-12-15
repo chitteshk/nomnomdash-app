@@ -1,7 +1,10 @@
 import nomnomdashlogo from "../../public/logo/nomnomdashlogo.jpg";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "./utils/useOnlineStatus";
 
 export default Header = () => {
+
+  const onlineStatus = useOnlineStatus();
   return (
     <div className="header">
       <div className="logo">
@@ -9,6 +12,9 @@ export default Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            {onlineStatus ? 'Online' : 'Offline'}
+          </li>
           <li>
             <Link to={"/"}>Home</Link>
           </li>
