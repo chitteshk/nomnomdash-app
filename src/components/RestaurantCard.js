@@ -41,4 +41,13 @@ const RestaurantCard = ({ resData, onClick }) => {
   );
 };
 
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => (
+    <div className="relative">
+      <label className="absolute bg-black m-1 p-1 text-white z-10">Promoted</label>
+      <RestaurantCard {...props} />
+    </div>
+  );
+};
+
 export default RestaurantCard;

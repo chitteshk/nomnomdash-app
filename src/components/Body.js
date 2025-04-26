@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 
 const Body = () => {
@@ -9,6 +9,7 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
   const [showTop, setShowTop] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardWithLabel = withPromotedLabel(RestaurantCard);
 
   const fetchRestaurants = async () => {
     setLoading(true);
@@ -98,14 +99,18 @@ const Body = () => {
             Loading...
           </p>
         ) : (
-          filteredRestaurants.map((resData) => (
-            <RestaurantCard
-              onClick={() => showResMenu(resData)}
-              key={resData.info.id}
-              resData={resData}
-              className="cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all"
-            />
-          ))
+          filteredRestaurants.map((resData) =>
+            resData.info.promoted ? (
+              <RestaurantCardWithLabel resData={resData} key={resData.info.id} onClick={() => showResMenu(resData)}/>
+            ) : (
+              <RestaurantCard
+                key={resData.info.id}
+                onClick={() => showResMenu(resData)}
+                resData={resData}
+                className="cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all"
+              />
+            )
+          )
         )}
       </div>
     </div>
