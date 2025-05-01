@@ -44,10 +44,9 @@ const SubCategory = ({ subCategoryData }) => (
   </div>
 );
 
-const MenuCardCategory = ({ categoryData }) => { 
+const MenuCardCategory = ({ categoryData, isCollapsed,setIndexItems }) => { 
   const [itemData, setItemData] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [isCollapsed,setIsCollapsed] = useState(true);
   
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const MenuCardCategory = ({ categoryData }) => {
   }, [categoryData]);
 
   const toggleDropDown = () => {
-    setIsCollapsed((prev) => !prev)
+    setIndexItems();
   };
 
   return (

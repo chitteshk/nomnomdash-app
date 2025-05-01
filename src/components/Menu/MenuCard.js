@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useCardGroupData } from "../utils/useCardGroupData";
 import MenuCardCategory from "./MenuCardCategory";
+import { useState } from "react";
 
 const MenuCard = () => {
   const { resID } = useParams();
   const { resInfo, cardGroups, loading, error } = useCardGroupData(resID);
+  const [indexItems, setIndexItems] = useState(-1);
 
   if (loading)
-    return (
-      <p className="text-center text-gray-500 text-lg mt-8">Loading...</p>
-    );
+    return <p className="text-center text-gray-500 text-lg mt-8">Loading...</p>;
 
   if (error)
     return (
@@ -87,7 +87,13 @@ const MenuCard = () => {
               key={index}
               className="menu-category-card bg-white rounded-lg shadow-md p-6"
             >
-              <MenuCardCategory categoryData={categories.card.card} />
+              <MenuCardCategory
+                categoryData={categories.card.card}
+                isCollapsed={index !== indexItems}
+                setIndexItems={() =>
+                  setIndexItems(indexItems === index ? -1 : index)
+                }
+              />
             </div>
           ))}
         </div>
