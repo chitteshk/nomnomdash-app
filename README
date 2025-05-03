@@ -13,3 +13,11 @@
 - Differential bundling
 - Code splitting
 - Tree shaking !
+
+# Redux toolkit
+- Install @reduxjs/toolkit and react-redux
+- Build our store
+- Connect sotre to app
+- Create card slice
+- Dispatch action
+- read data using selector

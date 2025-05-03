@@ -1,8 +1,12 @@
 import nomnomdashlogo from "../../public/logo/nomnomdashlogo.jpg";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
+
+  const cartItems = useSelector((store) => store.cart.items);
   const onlineStatus = useOnlineStatus();
 
   return (
@@ -52,7 +56,7 @@ const Header = () => {
               to="/cart"
               className="hover:text-blue-500 transition-colors duration-300"
             >
-              Cart
+              Cart ({cartItems.length} items)
             </Link>
           </li>
         </ul>

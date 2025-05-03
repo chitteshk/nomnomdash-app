@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/redux/cardSlice";
 
-const ItemCard = ({ card, isSubcategory }) => {
+export const ItemCard = ({ card, isSubcategory }) => {
+  const dispatch = useDispatch();
+
+  const handleOnClick = (card) => {
+    dispatch(addItem(card));
+  };
   // Conditionally render the item card if it's not a subcategory
   return card?.info && !isSubcategory ? (
     <div
@@ -22,8 +29,11 @@ const ItemCard = ({ card, isSubcategory }) => {
       </div>
       {/* Menu Item Image */}
       <div className="menu-item-img flex-shrink-0 relative">
-        <button className="absolute  mx-7 my-20 p-1 text-white bg-black rounded-lg">
-          Add{" "}
+        <button
+          onClick={() => handleOnClick(card)}
+          className="absolute  mx-7 my-20 p-1 text-white bg-black rounded-lg"
+        >
+          Add
         </button>
         <img
           src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${card?.info?.imageId}`}
@@ -35,19 +45,27 @@ const ItemCard = ({ card, isSubcategory }) => {
   ) : null;
 };
 
-const SubCategory = ({ subCategoryData }) => (
-  <div className="sub-category-container space-y-6 mt-6">
-    {subCategoryData.categories &&
-      subCategoryData.categories.map((cat, index) => (
-        <MenuCardCategory key={index} categoryData={cat} />
-      ))}
-  </div>
-);
+const SubCategory = ({ subCategoryData }) => {
+  const [indexItems, setIndexItems] = useState(-1);
+  return (
+    <div className="sub-category-container space-y-6 mt-6">
+      {subCategoryData.categories &&
+        subCategoryData.categories.map((cat, index) => (
+          <MenuCardCategory
+            key={index}
+            categoryData={cat}
+            isCollapsed={indexItems !== index}
+            setIndexItems={() => setIndexItems(indexItems === index ? -1 : index)}
+          />
+        ))}
+    </div>
+  );
+};
 
-const MenuCardCategory = ({ categoryData, isCollapsed,setIndexItems }) => { 
+const MenuCardCategory = ({ categoryData, isCollapsed, setIndexItems }) => {
   const [itemData, setItemData] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  
+  const [isSubCategory, setIsSubCategory] = useState(false);
 
   useEffect(() => {
     const getItemCards = (data) => {
@@ -64,6 +82,7 @@ const MenuCardCategory = ({ categoryData, isCollapsed,setIndexItems }) => {
             }
             if (category.categories && Array.isArray(category.categories)) {
               traverse(category.categories, true);
+              setIsSubCategory(true);
             }
           });
         }
@@ -94,7 +113,11 @@ const MenuCardCategory = ({ categoryData, isCollapsed,setIndexItems }) => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
           {categoryData.title || "Menu Category"}
         </h2>
-        <button onClick={toggleDropDown}>{isCollapsed ? '⏫️' : '⏬️'}</button>
+        {!isSubCategory && (
+          <button onClick={toggleDropDown}>
+            {isCollapsed ? "⏫️" : "⏬️"}
+          </button>
+        )}
       </div>
 
       {/* Items in the Category */}
