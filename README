@@ -21,3 +21,14 @@
 - Create card slice
 - Dispatch action
 - read data using selector
+
+# Testing app
+- Install react testing library
+- Install jest
+- Install babel dependencies
+- Configure babel
+- Configure parcel config to disable default babel transpilation as parcel uses babel already
+- Jest - nox jest --init
+- Install jsdom library
+- Install @babel/preset-react so jsx ( react files ) are configured for jest.
+- npm i -D @testing-library/jest-dom
