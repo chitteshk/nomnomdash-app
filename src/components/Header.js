@@ -1,4 +1,3 @@
-import nomnomdashlogo from "../../public/logo/nomnomdashlogo.jpg";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
 import { useSelector } from "react-redux";
@@ -14,7 +13,7 @@ const Header = () => {
       {/* Logo Section */}
       <div className="logo flex items-center">
         <img
-          src={nomnomdashlogo}
+          src=""
           alt="NomNomDash Logo"
           className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover"
         />

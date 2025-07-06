@@ -70,6 +70,7 @@ const Body = () => {
         <div className="search-container flex items-center w-full lg:w-2/3">
           <input
             value={searchText}
+            data-testid = "search"
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
@@ -93,7 +94,7 @@ const Body = () => {
       </div>
 
       {/* Cards Container */}
-      <div className="cards-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+      <div data-testid = "resCard" className="cards-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
         {loading ? (
           <p className="col-span-full text-center text-lg text-gray-500">
             Loading...
