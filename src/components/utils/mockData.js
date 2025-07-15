@@ -1246,7 +1246,7 @@ const restaurantListData = [
           iconType: "ICON_TYPE_EMPTY",
         },
         availability: {
-          nextCloseTime: "2024-08-18 02:00:03",
+          nextCloseTime: "2024-08-18 02:00:05",
           opened: true,
         },
         badges: {
